@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>io.github.niko11111.SoundbarKeys</string>
+    <key>CFBundleName</key>
+    <string>SoundbarKeys</string>
+    <key>CFBundleDisplayName</key>
+    <string>SoundbarKeys</string>
+    <key>CFBundleExecutable</key>
+    <string>SoundbarKeys</string>
+    <key>CFBundleIconFile</key>
+    <string>AppIcon</string>
+    <key>CFBundleIconName</key>
+    <string>AppIcon</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundleDevelopmentRegion</key>
+    <string>en</string>
+    <key>CFBundleLocalizations</key>
+    <array>
+        <string>en</string>
+        <string>de</string>
+    </array>
+    <key>LSMinimumSystemVersion</key>
+    <string>26.0</string>
+    <key>LSUIElement</key>
+    <true/>
+    <key>NSHumanReadableCopyright</key>
+    <string>Licensed under the GNU GPL v3. Not affiliated with Bose Corporation.</string>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>SoundbarKeys finds your soundbar and controls its volume on your local network.</string>
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_bose-passport._tcp</string>
+    </array>
+</dict>
+</plist>

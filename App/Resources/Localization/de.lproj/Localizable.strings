@@ -1,0 +1,88 @@
+/* German translation of SoundbarKeys */
+
+/* Connection state */
+"connected" = "verbunden";
+"connecting …" = "verbinde …";
+"searching …" = "suche …";
+"not connected (%@)" = "nicht verbunden (%@)";
+"not connected yet" = "noch nicht verbunden";
+"soundbar not found on the network" = "Soundbar im Netzwerk nicht gefunden";
+"sign-in required" = "Anmeldung nötig";
+"Not signed in to your Bose account." = "Nicht beim Bose-Konto angemeldet.";
+"Request to the Bose account service failed: %@" = "Anfrage an den Bose-Kontodienst fehlgeschlagen: %@";
+"Keychain access failed (security exit code %d)." = "Zugriff auf den Schlüsselbund fehlgeschlagen (security-Exitcode %d).";
+"Changing “Launch at login” failed" = "„Bei Anmeldung starten“ konnte nicht geändert werden";
+
+/* Overlay */
+"Soundbar" = "Soundbar";
+"muted" = "stumm";
+
+/* Menu bar panel */
+"Mute" = "Stumm";
+"Unmute" = "Ton an";
+"Currently above your maximum (%lld)" = "Aktuell über deinem Maximum (%lld)";
+"Keys inactive – output: %@" = "Tasten inaktiv – Ausgabe: %@";
+"Allow Accessibility access …" = "Bedienungshilfen freigeben …";
+"Sign-in required" = "Anmeldung nötig";
+"Sign in …" = "Anmelden …";
+"Settings …" = "Einstellungen …";
+"Reconnect" = "Neu verbinden";
+"Quit" = "Beenden";
+"Sound" = "Klang";
+"Normal" = "Normal";
+"Dialogue" = "Dialog";
+"Night" = "Nacht";
+"Dialogue mode makes voices clearer" = "Der Dialogmodus macht Stimmen deutlicher";
+
+/* Settings */
+"Volume" = "Lautstärke";
+"Maximum volume" = "Maximale Lautstärke";
+"Step per key press" = "Schritt pro Tastendruck";
+"Keys and slider never go above this maximum. The soundbar itself allows at most %lld. If it is turned up another way (e.g. with the TV remote), the limit does not apply." = "Tasten und Regler stellen nie lauter als dieses Maximum. Die Soundbar selbst erlaubt höchstens %lld. Wird sie auf anderem Weg lauter gestellt (z. B. per TV-Fernbedienung), greift die Grenze nicht.";
+"Automatic" = "Automatisch";
+"Selected soundbar (not found)" = "Gewählte Soundbar (nicht gefunden)";
+"Search again" = "Erneut suchen";
+"Automatic uses the soundbar found first. With a fixed choice, SoundbarKeys never switches to another device." = "„Automatisch“ nimmt die zuerst gefundene Soundbar. Bei einer festen Auswahl wechselt SoundbarKeys nie auf ein anderes Gerät.";
+"Quiet hours" = "Ruhezeiten";
+"From" = "Von";
+"Until" = "Bis";
+"During quiet hours this lower maximum applies. When they begin, a louder soundbar is turned down automatically (only while the Mac outputs via HDMI)." = "In den Ruhezeiten gilt dieses niedrigere Maximum. Beginnen sie, wird eine lautere Soundbar automatisch leiser gestellt (nur wenn der Mac über HDMI ausgibt).";
+"Quiet hours: at most %lld" = "Ruhezeit: höchstens %lld";
+"General" = "Allgemein";
+"Volume indicator" = "Lautstärkeanzeige";
+"Top right" = "Oben rechts";
+"Bottom center" = "Unten mittig";
+"Off" = "Aus";
+"Launch at login" = "Bei Anmeldung starten";
+"Status" = "Status";
+"Connection" = "Verbindung";
+"Keys" = "Tasten";
+"active (%@)" = "aktiv (%@)";
+"inactive (%@)" = "inaktiv (%@)";
+"Token valid until" = "Token gültig bis";
+"Open diagnostic log" = "Diagnose-Log öffnen";
+"About" = "Über";
+"Version" = "Version";
+"GitHub" = "GitHub";
+"Support on Ko-fi" = "Auf Ko-fi unterstützen";
+"SoundbarKeys is not affiliated with or endorsed by Bose Corporation. Bose is a trademark of Bose Corporation." = "SoundbarKeys steht in keiner Verbindung zur Bose Corporation und wird von ihr nicht unterstützt. Bose ist eine Marke der Bose Corporation.";
+
+/* Bose account */
+"Account" = "Konto";
+"Bose account" = "Bose-Konto";
+"Signed in" = "Angemeldet";
+"Not signed in" = "Nicht angemeldet";
+"Sign out" = "Abmelden";
+"Sign in on Bose's own page with the account you use in the Bose app. SoundbarKeys does not read the form; it only keeps the sign-in token in your Keychain." = "Die Anmeldung läuft auf Bose' eigener Seite, mit dem Konto aus der Bose-App. SoundbarKeys liest das Formular nicht mit, sondern bewahrt nur das Anmelde-Token in deinem Schlüsselbund auf.";
+"Bose rejected the sign-in: %@" = "Bose hat die Anmeldung abgelehnt: %@";
+"The sign-in did not return an authorization code." = "Die Anmeldung hat keinen Autorisierungscode zurückgegeben.";
+"Exchanging the sign-in code failed (HTTP %lld)." = "Der Tausch des Anmeldecodes ist fehlgeschlagen (HTTP %lld).";
+
+/* Edit menu (key equivalents only) */
+"Edit" = "Bearbeiten";
+"Undo" = "Widerrufen";
+"Redo" = "Wiederholen";
+"Cut" = "Ausschneiden";
+"Copy" = "Kopieren";
+"Paste" = "Einsetzen";
+"Select All" = "Alles auswählen";
