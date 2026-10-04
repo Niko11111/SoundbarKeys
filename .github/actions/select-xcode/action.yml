@@ -8,9 +8,11 @@ runs:
         ls -d /Applications/Xcode*.app
         XCODE=$(ls -d /Applications/Xcode_27*.app 2>/dev/null | sort -V | tail -1)
         if [ -n "$XCODE" ]; then sudo xcode-select -s "$XCODE"; fi
-        if ! xcodebuild -version | grep -q "^Xcode 27"; then
+        # Read the whole output first: "| grep -q" closes the pipe early and xcodebuild aborts.
+        VERSION=$(xcodebuild -version)
+        echo "$VERSION"
+        if [[ "$VERSION" != "Xcode 27"* ]]; then
           echo "::error::Xcode 27 is not available on this runner (use runs-on: xcode-27)"
           exit 1
         fi
-        xcodebuild -version
         swift --version
