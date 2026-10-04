@@ -29,6 +29,10 @@ CI runs on the `xcode-27` runner image (preview): the app needs the macOS 27 SDK
 - One function, one task. Max. **50 lines** per function (SwiftUI `body` included: split into subviews), max. **5 parameters**, max. **1,000 lines** per file.
 - Don't duplicate logic. If something exists in `SoundbarKeysCore`, use it.
 
+### Settings window
+- One file per toolbar tab: `App/Sources/SoundbarKeys/Settings<Name>Tab.swift`, each wrapped in `SettingsPage` (grouped form, scrolls if taller than the screen allows).
+- A new setting goes into the tab it belongs to. If a tab gets crowded, split it into a new tab instead of making pages longer.
+
 ### Readability
 - Descriptive names, no abbreviation puzzles.
 - No magic numbers: timeouts, limits and sizes are named constants in `Config.swift`, with the unit in the name (`pingIntervalSeconds`).

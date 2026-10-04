@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Settings window with toolbar tabs (General, Volume, Soundbar, Account, About); pages never grow taller than the screen
 - Choose the output device that activates the volume keys (default: any HDMI device)
 - "Report compatibility …" in the settings: opens a pre-filled GitHub issue with model, firmware and supported functions (no names or serial numbers)
 - Error messages from the soundbar are logged without the echoed request (it contained the access token)

@@ -117,7 +117,7 @@ final class AppController: NSObject, NSApplicationDelegate {
 
     private func openSignIn() {
         closePanel()
-        settingsWindow.show()
+        settingsWindow.show(tab: .account)
         guard !model.isSigningIn else { return }
         model.isSigningIn = true
         model.signInError = nil

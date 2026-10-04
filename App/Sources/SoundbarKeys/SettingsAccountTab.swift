@@ -1,8 +1,19 @@
 import SwiftUI
 
-/// Settings section showing the Bose account state with sign-in / sign-out.
-/// Signing in opens Bose's own sign-in page (see `BoseLogin`).
-struct AccountSection: View {
+/// Tab "Account": Bose account state, sign-in / sign-out, token validity.
+struct SettingsAccountTab: View {
+    @ObservedObject var model: AppModel
+    let actions: PanelActions
+
+    var body: some View {
+        SettingsPage {
+            AccountSection(model: model, actions: actions)
+        }
+    }
+}
+
+/// Bose account state with sign-in / sign-out. Signing in opens Bose's own page (see `BoseLogin`).
+private struct AccountSection: View {
     @ObservedObject var model: AppModel
     let actions: PanelActions
 
@@ -22,6 +33,11 @@ struct AccountSection: View {
             }
             if let error = model.signInError {
                 Text(error).font(.callout).foregroundStyle(.red).fixedSize(horizontal: false, vertical: true)
+            }
+            if model.signedIn, let exp = model.tokenExpiry {
+                LabeledContent("Token valid until") {
+                    Text(exp, format: .dateTime.day().month().hour().minute())
+                }
             }
         } header: {
             Text("Account")
