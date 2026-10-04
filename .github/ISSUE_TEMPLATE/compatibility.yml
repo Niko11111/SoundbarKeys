@@ -1,0 +1,51 @@
+name: Compatibility report
+description: 'Tell us whether SoundbarKeys works with your soundbar. Easiest from the app: Settings → Status → "Report compatibility …".'
+title: "Compatibility: "
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping! If you opened this from SoundbarKeys, the fields below are already filled in.
+        The report contains only technical facts (model, firmware, supported functions), no names or serial numbers.
+  - type: input
+    id: model
+    attributes:
+      label: Soundbar model
+      placeholder: Bose Soundbar 700
+    validations:
+      required: true
+  - type: input
+    id: firmware
+    attributes:
+      label: Soundbar firmware
+      placeholder: 25.0.40
+  - type: dropdown
+    id: works
+    attributes:
+      label: Does it work?
+      options:
+        - Everything works
+        - Partly (please describe below)
+        - Does not work
+    validations:
+      required: true
+  - type: dropdown
+    id: connection
+    attributes:
+      label: How is the soundbar connected to the TV / Mac?
+      options:
+        - HDMI eARC
+        - HDMI ARC
+        - Optical
+        - Other
+  - type: textarea
+    id: notes
+    attributes:
+      label: What works, what doesn't?
+      description: Volume keys, slider, mute, sound mode, quiet hours, sign-in …
+  - type: textarea
+    id: report
+    attributes:
+      label: Report from the app
+      description: Filled in automatically; otherwise paste it from the clipboard.

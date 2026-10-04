@@ -1,0 +1,26 @@
+name: Bug report
+description: Something does not work as expected.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, what happened instead?
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: SoundbarKeys, macOS and soundbar
+      placeholder: SoundbarKeys 1.0, macOS 26.7, Bose Soundbar 700
+    validations:
+      required: true
+  - type: textarea
+    id: log
+    attributes:
+      label: Diagnostic log (optional)
+      description: |
+        Settings → Status → "Open diagnostic log". Paste the lines around the problem.
+        The log contains no typed characters, passwords or tokens; please remove your soundbar's name if you like.
+      render: text

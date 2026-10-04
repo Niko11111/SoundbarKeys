@@ -21,6 +21,14 @@ If your Mac is connected to a TV via HDMI and the TV passes the sound on to a so
 - The soundbar is set up with the Bose app, connected to your network and to the TV via HDMI ARC/eARC
 - A Bose account (the same one you use in the Bose app)
 
+## Tested devices
+
+| Soundbar | Firmware | Mac / macOS | Result |
+|---|---|---|---|
+| Bose Soundbar 700 | 25.0.40 | Mac mini M4, macOS 26.7 | ✅ everything works |
+
+Other "Bose Music" soundbars (500, 900, Ultra, Smart Soundbar …) use the same API and very likely work, but have not been tested yet. If you have one, please report it: **Settings → Status → "Report compatibility …"** opens a pre-filled issue.
+
 ## Installation
 
 ### Download
