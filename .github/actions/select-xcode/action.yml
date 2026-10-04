@@ -1,5 +1,5 @@
 name: Select Xcode 27
-description: Selects the newest installed Xcode 27 (the app needs the macOS 27 SDK).
+description: Makes sure Xcode 27 is selected (the app needs the macOS 27 SDK). Use with runs-on xcode-27.
 runs:
   using: composite
   steps:
@@ -7,10 +7,10 @@ runs:
       run: |
         ls -d /Applications/Xcode*.app
         XCODE=$(ls -d /Applications/Xcode_27*.app 2>/dev/null | sort -V | tail -1)
-        if [ -z "$XCODE" ]; then
-          echo "::error::No Xcode 27 on this runner image"
+        if [ -n "$XCODE" ]; then sudo xcode-select -s "$XCODE"; fi
+        if ! xcodebuild -version | grep -q "^Xcode 27"; then
+          echo "::error::Xcode 27 is not available on this runner (use runs-on: xcode-27)"
           exit 1
         fi
-        sudo xcode-select -s "$XCODE"
         xcodebuild -version
         swift --version
