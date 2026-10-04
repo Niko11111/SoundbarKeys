@@ -39,6 +39,7 @@ struct SettingsView: View {
             SoundbarSection(model: model, settings: settings, search: actions.searchSoundbars)
             VolumeSection(model: model, settings: settings)
             QuietHoursSection(settings: settings)
+            KeysSection(model: model, settings: settings, refresh: actions.refreshOutputDevices)
             Section("General") {
                 Picker("Volume indicator", selection: $settings.hudPosition) {
                     Text("Top right").tag(HUDPosition.topRight)
@@ -92,6 +93,34 @@ private struct VolumeSection: View {
 
     private var maxBinding: Binding<Double> {
         Binding(get: { Double(settings.maxVolume) }, set: { settings.maxVolume = Int($0.rounded()) })
+    }
+}
+
+/// Which output device makes the volume keys control the soundbar.
+private struct KeysSection: View {
+    @ObservedObject var model: AppModel
+    @ObservedObject var settings: Settings
+    let refresh: () -> Void
+
+    var body: some View {
+        Section {
+            Picker("Active with output", selection: $settings.keysOutputUID) {
+                Text("Any HDMI device").tag(String?.none)
+                ForEach(model.outputDevices) { device in
+                    Text(verbatim: device.name).tag(String?.some(device.uid))
+                }
+                if let selected = settings.keysOutputUID,
+                   !model.outputDevices.contains(where: { $0.uid == selected }) {
+                    Text("Selected device (not connected)").tag(String?.some(selected))
+                }
+            }
+        } header: {
+            Text("Volume keys")
+        } footer: {
+            Text("With any other output the keys control the Mac as usual. Choose your TV here if you also use an HDMI monitor with speakers.")
+                .font(.caption).foregroundStyle(.secondary)
+        }
+        .onAppear(perform: refresh)
     }
 }
 

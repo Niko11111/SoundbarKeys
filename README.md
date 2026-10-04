@@ -72,7 +72,7 @@ python3 -m venv .venv
 
 ## How it works
 
-- The volume keys are only intercepted while the Mac's audio output is an **HDMI** device. With any other output (built-in speakers, headphones, AirPlay …) macOS handles them as usual.
+- The volume keys are only intercepted while the Mac's audio output is an **HDMI** device, or the output device you choose in Settings → Volume keys (useful with an additional HDMI monitor, or an optical connection). With any other output (built-in speakers, headphones, AirPlay …) macOS handles them as usual.
 - The panel controls the soundbar over the network, so it works whatever the Mac's output is.
 - The soundbar is found via Bonjour (`_bose-passport._tcp`) and controlled through its local WebSocket API (port 8082), the same way the Bose app does it.
 - macOS also has its own digital volume for HDMI outputs (the slider in Control Center). It is independent of the soundbar volume; SoundbarKeys leaves it alone.

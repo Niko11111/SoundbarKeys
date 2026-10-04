@@ -48,6 +48,11 @@
 "Until" = "Bis";
 "During quiet hours this lower maximum applies. When they begin, a louder soundbar is turned down automatically (only while the Mac outputs via HDMI)." = "In den Ruhezeiten gilt dieses niedrigere Maximum. Beginnen sie, wird eine lautere Soundbar automatisch leiser gestellt (nur wenn der Mac über HDMI ausgibt).";
 "Quiet hours: at most %lld" = "Ruhezeit: höchstens %lld";
+"Volume keys" = "Lautstärketasten";
+"Active with output" = "Aktiv bei Ausgabe";
+"Any HDMI device" = "Jedes HDMI-Gerät";
+"Selected device (not connected)" = "Gewähltes Gerät (nicht verbunden)";
+"With any other output the keys control the Mac as usual. Choose your TV here if you also use an HDMI monitor with speakers." = "Bei jeder anderen Ausgabe steuern die Tasten wie gewohnt den Mac. Wähle hier deinen TV, wenn du zusätzlich einen HDMI-Monitor mit Lautsprechern nutzt.";
 "General" = "Allgemein";
 "Volume indicator" = "Lautstärkeanzeige";
 "Top right" = "Oben rechts";

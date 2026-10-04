@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.0 – unreleased
+## Unreleased
+
+- Choose the output device that activates the volume keys (default: any HDMI device)
+
+## 1.0 – 2026-10-04
 
 First version.
 

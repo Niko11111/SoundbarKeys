@@ -45,6 +45,7 @@ final class AppController: NSObject, NSApplicationDelegate {
             openAccessibility: { [weak self] in self?.openAccessibility() },
             reconnect: { [weak self] in self?.client.connect() },
             searchSoundbars: { [weak self] in self?.searchSoundbars() },
+            refreshOutputDevices: { [weak self] in self?.model.outputDevices = OutputWatcher.allOutputDevices() },
             openSignIn: { [weak self] in self?.openSignIn() },
             signOut: { [weak self] in self?.signOut() },
             quit: { NSApp.terminate(nil) }
@@ -76,6 +77,9 @@ final class AppController: NSObject, NSApplicationDelegate {
             guard let self, self.output.isActive else { return false }
             return self.client.lowerVolume(to: maximum)
         }
+        settings.$keysOutputUID
+            .sink { [weak self] uid in self?.output.selectedUID = uid }
+            .store(in: &cancellables)
         settings.$selectedSoundbarGUID
             .dropFirst()
             .removeDuplicates()

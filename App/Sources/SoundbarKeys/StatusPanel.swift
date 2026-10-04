@@ -11,6 +11,7 @@ struct PanelActions {
     var openAccessibility: () -> Void
     var reconnect: () -> Void
     var searchSoundbars: () -> Void
+    var refreshOutputDevices: () -> Void
     /// Opens the settings and Bose's sign-in page.
     var openSignIn: () -> Void
     var signOut: () -> Void

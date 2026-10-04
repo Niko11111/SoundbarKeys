@@ -25,6 +25,11 @@ final class Settings: ObservableObject {
         didSet { UserDefaults.standard.set(selectedSoundbarGUID, forKey: "selectedSoundbar") }
     }
 
+    /// UID of the output device that activates the volume keys; nil = any HDMI device.
+    @Published var keysOutputUID: String? {
+        didSet { UserDefaults.standard.set(keysOutputUID, forKey: "keysOutputUID") }
+    }
+
     @Published var quietEnabled: Bool { didSet { UserDefaults.standard.set(quietEnabled, forKey: "quietEnabled") } }
     /// Minutes since midnight.
     @Published var quietStartMinute: Int { didSet { UserDefaults.standard.set(quietStartMinute, forKey: "quietStart") } }
@@ -44,6 +49,7 @@ final class Settings: ObservableObject {
         step = Config.stepChoices.contains(s) ? s : Config.defaultStep
         hudPosition = d.string(forKey: "hudPosition").flatMap(HUDPosition.init(rawValue:)) ?? .topRight
         selectedSoundbarGUID = d.string(forKey: "selectedSoundbar")
+        keysOutputUID = d.string(forKey: "keysOutputUID")
         quietEnabled = d.bool(forKey: "quietEnabled")
         quietStartMinute = d.object(forKey: "quietStart") as? Int ?? Config.defaultQuietStartMinute
         quietEndMinute = d.object(forKey: "quietEnd") as? Int ?? Config.defaultQuietEndMinute
@@ -110,6 +116,8 @@ final class AppModel: ObservableObject {
     /// Result of the last search for the soundbar selection.
     @Published var availableSoundbars: [Soundbar] = []
     @Published var isSearching = false
+    /// Output devices for the key activation picker (refreshed when the settings open).
+    @Published var outputDevices: [OutputDevice] = []
     @Published var signedIn = false
     @Published var isSigningIn = false
     /// Message of the last failed sign-in, shown in the account section.
