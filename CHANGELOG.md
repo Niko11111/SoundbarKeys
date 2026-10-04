@@ -14,3 +14,4 @@ First version.
 - On-screen volume indicator in the style of macOS 26: top right, bottom center or off
 - Sign-in on Bose's own page in a small web window (the app does not read the form), sign-out; automatic token refresh
 - English and German
+- Distributed as a DMG (Apple Silicon + Intel), built with `App/make_dmg.sh`

@@ -23,18 +23,28 @@ If your Mac is connected to a TV via HDMI and the TV passes the sound on to a so
 
 ## Installation
 
-There is no prebuilt download yet; build it from source:
+### Download
+
+1. Download `SoundbarKeys-<version>.dmg` from the [latest release](https://github.com/Niko11111/SoundbarKeys/releases/latest).
+2. Open it and drag **SoundbarKeys** into **Applications**.
+3. Open SoundbarKeys. The first time, macOS blocks it: the app is not notarized by Apple (that needs a paid developer account). To allow it once:
+   - System Settings → **Privacy & Security** → scroll down → **Open Anyway** next to "SoundbarKeys was blocked", then confirm.
+
+Runs on Apple Silicon and Intel Macs with macOS 26 or later. After an update, macOS may ask for the Accessibility permission again.
+
+### Build from source
 
 ```sh
 xcode-select --install          # Command Line Tools (Swift) if not installed yet
 git clone https://github.com/Niko11111/SoundbarKeys.git
 cd SoundbarKeys
 App/make_app.sh                 # builds, signs and installs /Applications/SoundbarKeys.app
+App/make_dmg.sh                 # or: builds the distributable DMG (Apple Silicon + Intel) in App/build/
 ```
 
 The app icon is compiled with `actool` if Xcode is installed; otherwise the precompiled icon in `App/Resources/CompiledIcon` is used.
 
-The script signs with an "Apple Development" certificate if your Keychain has one. Without it the app is signed ad hoc, and macOS asks for the Accessibility permission again after every rebuild.
+`make_app.sh` signs with an "Apple Development" certificate if your Keychain has one; without it the app is signed ad hoc, and macOS asks for the Accessibility permission again after every rebuild. `make_dmg.sh` signs with a "Developer ID Application" certificate if available (and notarizes with `NOTARY_PROFILE=<notarytool profile>`), otherwise ad hoc.
 
 ### Sign in once
 

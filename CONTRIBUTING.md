@@ -10,6 +10,8 @@ cd App && swift test                                    # needs Xcode (Swift Tes
 App/make_app.sh                                         # builds, signs, installs
 ```
 
+Release: bump `CFBundleShortVersionString` in `App/Resources/Info.plist`, update `CHANGELOG.md`, run `App/make_dmg.sh`, attach `App/build/SoundbarKeys-<version>.dmg` to a GitHub release `v<version>`.
+
 ## Rules
 
 ### Language and text
