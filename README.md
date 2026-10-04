@@ -30,7 +30,9 @@ If your Mac is connected to a TV via HDMI and the TV passes the sound on to a so
 3. Open SoundbarKeys. The first time, macOS blocks it: the app is not notarized by Apple (that needs a paid developer account). To allow it once:
    - System Settings → **Privacy & Security** → scroll down → **Open Anyway** next to "SoundbarKeys was blocked", then confirm.
 
-Runs on Apple Silicon and Intel Macs with macOS 26 or later. After an update, macOS may ask for the Accessibility permission again.
+Runs on Apple Silicon and Intel Macs with macOS 26 or later.
+
+**After an update (or if the volume keys do nothing):** macOS ties the Accessibility permission to the exact app build, and the switch in the list may still belong to the old one. In System Settings → Privacy & Security → **Accessibility**, remove every "SoundbarKeys" entry with **−**, quit and restart SoundbarKeys, and allow it again. The exclamation mark on the menu bar icon disappears once it works.
 
 ### Build from source
 
