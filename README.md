@@ -25,7 +25,7 @@ If your Mac is connected to a TV via HDMI and the TV passes the sound on to a so
 
 | Soundbar | Firmware | Mac / macOS | Result |
 |---|---|---|---|
-| Bose Soundbar 700 | 25.0.40 | Mac mini M4, macOS 26.7 | ✅ everything works |
+| Bose Soundbar 700 | 25.0.40 | Mac mini M4, macOS 26.7 | ✅ everything works (1.0, 1.1) |
 
 Other "Bose Music" soundbars (500, 900, Ultra, Smart Soundbar …) use the same API and very likely work, but have not been tested yet. If you have one, please report it: **Settings → Status → "Report compatibility …"** opens a pre-filled issue.
 

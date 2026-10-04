@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1 – 2026-10-04
 
 - Settings window with toolbar tabs (General, Volume, Soundbar, Account, About); pages never grow taller than the screen
 - Choose the output device that activates the volume keys (default: any HDMI device)
