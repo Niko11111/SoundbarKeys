@@ -10,7 +10,9 @@ cd App && swift test                                    # needs Xcode (Swift Tes
 App/make_app.sh                                         # builds, signs, installs
 ```
 
-Release: bump `CFBundleShortVersionString` in `App/Resources/Info.plist`, update `CHANGELOG.md`, run `App/make_dmg.sh`, attach `App/build/SoundbarKeys-<version>.dmg` to a GitHub release `v<version>`.
+Release: bump `CFBundleShortVersionString` in `App/Resources/Info.plist`, update `CHANGELOG.md`, commit, then push a tag `v<version>`. The *Release* workflow builds the DMG on GitHub, attests its provenance and creates a **draft** release; review the notes and publish it. (A manual run of the workflow is a dry run that only keeps the DMG as an artifact.)
+
+CI runs on the `xcode-27` runner image (preview): the app needs the macOS 27 SDK.
 
 ## Rules
 
