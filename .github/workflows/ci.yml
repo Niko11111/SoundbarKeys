@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: macos-26-arm64
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/select-xcode
+      - name: Convention check
+        run: python3 tools/check_conventions.py
+      - name: Unit tests
+        working-directory: App
+        run: swift test
+      - name: Release build (Apple Silicon + Intel)
+        working-directory: App
+        run: swift build -c release --arch arm64 --arch x86_64

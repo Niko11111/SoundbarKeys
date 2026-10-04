@@ -1,0 +1,46 @@
+name: Release
+
+# Tag v<version> → builds the DMG on GitHub's machines, attaches a build provenance attestation
+# (verify with: gh attestation verify SoundbarKeys-<version>.dmg -R Niko11111/SoundbarKeys)
+# and creates a draft release to review and publish.
+# Run manually (workflow_dispatch) for a dry run: the DMG is only kept as a workflow artifact.
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  dmg:
+    runs-on: macos-26-arm64
+    steps:
+      - uses: actions/checkout@v5
+      - uses: ./.github/actions/select-xcode
+      - name: Checks and tests
+        run: |
+          python3 tools/check_conventions.py
+          (cd App && swift test)
+      - name: Build DMG
+        run: App/make_dmg.sh
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v3
+        with:
+          subject-path: App/build/SoundbarKeys-*.dmg
+      - name: Keep DMG as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SoundbarKeys-dmg
+          path: App/build/SoundbarKeys-*.dmg
+      - name: Create draft release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" App/build/SoundbarKeys-*.dmg --draft \
+            --title "SoundbarKeys ${GITHUB_REF_NAME#v}" \
+            --notes "Built by GitHub Actions from ${GITHUB_SHA}. Verify: \`gh attestation verify SoundbarKeys-${GITHUB_REF_NAME#v}.dmg -R ${GITHUB_REPOSITORY}\`. See CHANGELOG.md."

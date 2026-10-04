@@ -24,7 +24,9 @@ cp "$BIN_DIR/SoundbarKeys" "$APP/Contents/MacOS/"
 cp Resources/Info.plist "$APP/Contents/"
 cp -R Resources/Localization/*.lproj "$APP/Contents/Resources/"
 
-XCODE=$(mdfind "kMDItemCFBundleIdentifier == 'com.apple.dt.Xcode'" 2>/dev/null | head -1)
+# The selected developer directory first (CI runners have Spotlight disabled), then Spotlight.
+XCODE=$(xcode-select -p 2>/dev/null | sed -n 's#/Contents/Developer$##p')
+[[ -x "$XCODE/Contents/Developer/usr/bin/actool" ]] || XCODE=$(mdfind "kMDItemCFBundleIdentifier == 'com.apple.dt.Xcode'" 2>/dev/null | head -1)
 ACTOOL="$XCODE/Contents/Developer/usr/bin/actool"
 if [[ -n "$XCODE" && -x "$ACTOOL" ]]; then
     rm -rf Resources/CompiledIcon && mkdir -p Resources/CompiledIcon
