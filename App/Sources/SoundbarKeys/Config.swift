@@ -29,6 +29,8 @@ enum Config {
     /// How often to check whether Accessibility access was granted.
     static let accessibilityPollSeconds: TimeInterval = 2
     static let hudVisibleSeconds: TimeInterval = 1.5
+    /// Maximum wait for the answer to a one-off query (e.g. for the compatibility report).
+    static let queryTimeoutSeconds: TimeInterval = 5
     /// How often quiet hours are re-evaluated (start/end take effect within this time).
     static let quietHoursCheckSeconds: TimeInterval = 30
     /// After a volume key press, key routing is logged for this long (diagnostics).

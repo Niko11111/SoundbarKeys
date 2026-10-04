@@ -44,6 +44,8 @@ final class SoundbarClient: NSObject {
     /// further key presses only move the target.
     private(set) var pendingTarget: Int?
     private var putInFlight = false
+    /// Callbacks for one-off queries, by request id (see `query`).
+    private var responseHandlers: [Int: ([String: Any]?) -> Void] = [:]
 
     init(tokens: TokenStore) {
         self.tokens = tokens
@@ -134,6 +136,9 @@ final class SoundbarClient: NSObject {
         task = nil
         putInFlight = false
         pendingTarget = nil
+        let handlers = responseHandlers.values
+        responseHandlers.removeAll()
+        handlers.forEach { $0(nil) }
     }
 
     private func connectionLost(_ reason: String, id: Int) {
@@ -176,6 +181,9 @@ final class SoundbarClient: NSObject {
             onFrontDoorReady()
             return
         }
+        if isResponse, let id = header["reqID"] as? Int, let handler = responseHandlers.removeValue(forKey: id) {
+            handler(status == 200 ? msg["body"] as? [String: Any] : nil)
+        }
 
         if isResponse && status != 200 {
             handleError(msg, resource: resource, status: status)
@@ -200,7 +208,7 @@ final class SoundbarClient: NSObject {
     private func handleError(_ msg: [String: Any], resource: String, status: Int) {
         let header = msg["header"] as? [String: Any]
         let error = (msg["error"] as? [String: Any])?["message"] as? String ?? "status \(status)"
-        DiagLog.write("API: \(header?["method"] as? String ?? "") \(resource) -> \(status) \(error.prefix(200))")
+        DiagLog.write("API: \(header?["method"] as? String ?? "") \(resource) -> \(status) \(APIErrorText.sanitized(error))")
         if resource == "/audio/volume" { putInFlight = false; pendingTarget = nil }
         guard status == 401 else { return }
         // Token rejected → refresh and reconnect
@@ -241,14 +249,17 @@ final class SoundbarClient: NSObject {
         if state != .ready { state = .ready }
     }
 
-    private func send(_ method: String, _ resource: String, body: [String: Any] = [:], version: Int = 1) async {
-        guard let t = task, let guid = soundbar?.guid else { return }
+    private func send(_ method: String, _ resource: String, body: [String: Any] = [:], version: Int = 1,
+                      onResponse: (([String: Any]?) -> Void)? = nil) async {
+        guard let t = task, let guid = soundbar?.guid else { onResponse?(nil); return }
         let token: String
         do { token = try await tokens.validAccessToken() } catch {
             state = .needsLogin(error.localizedDescription)
+            onResponse?(nil)
             return
         }
         reqID += 1
+        if let onResponse { responseHandlers[reqID] = onResponse }
         let msg: [String: Any] = [
             "header": [
                 "device": guid, "method": method, "msgtype": "REQUEST",
@@ -261,6 +272,18 @@ final class SoundbarClient: NSObject {
               let text = String(data: data, encoding: .utf8) else { return }
         do { try await t.send(.string(text)) } catch {
             connectionLost("send: \(error.localizedDescription)", id: connectionID)
+        }
+    }
+
+    /// One-off GET; returns the body, or nil when not connected, on an error or after a timeout.
+    func query(_ resource: String) async -> [String: Any]? {
+        guard isReady else { return nil }
+        return await withCheckedContinuation { continuation in
+            let once = OnceBox<[String: Any]?>(continuation) {}
+            Task { await send("GET", resource) { body in once.finish(body) } }
+            DispatchQueue.main.asyncAfter(deadline: .now() + Config.queryTimeoutSeconds) {
+                MainActor.assumeIsolated { once.finish(nil) }
+            }
         }
     }
 

@@ -46,6 +46,7 @@ final class AppController: NSObject, NSApplicationDelegate {
             reconnect: { [weak self] in self?.client.connect() },
             searchSoundbars: { [weak self] in self?.searchSoundbars() },
             refreshOutputDevices: { [weak self] in self?.model.outputDevices = OutputWatcher.allOutputDevices() },
+            reportCompatibility: { [weak self] in self?.reportCompatibility() },
             openSignIn: { [weak self] in self?.openSignIn() },
             signOut: { [weak self] in self?.signOut() },
             quit: { NSApp.terminate(nil) }
@@ -151,6 +152,15 @@ final class AppController: NSObject, NSApplicationDelegate {
         }
         client.connect() // ends in "sign-in required"
         updateUI()
+    }
+
+    private func reportCompatibility() {
+        model.reportError = nil
+        Task {
+            if await !CompatibilityReporter.report(client: client, output: output) {
+                model.reportError = String(localized: "The soundbar did not answer. Is it connected?")
+            }
+        }
     }
 
     private func searchSoundbars() {

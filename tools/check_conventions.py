@@ -63,6 +63,22 @@ def block_length(lines, start):
     return len(lines) - start
 
 
+def signature_parameters(lines, start):
+    """Parameter list of a func/init declaration, also when it spans several lines."""
+    if not re.search(r"\b(func|init)\b", lines[start]):
+        return None
+    text = " ".join(lines[start:start + 12])
+    open_at = text.find("(")
+    if open_at < 0:
+        return None
+    depth = 0
+    for pos in range(open_at, len(text)):
+        depth += {"(": 1, ")": -1}.get(text[pos], 0)
+        if depth == 0:
+            return text[open_at + 1:pos]
+    return None
+
+
 def parameter_count(signature):
     """Number of parameters in a Swift parameter list; colons inside [...] or <...> types don't count."""
     flat = re.sub(r"\[[^\]]*\]|<[^>]*>", "", signature)
@@ -70,7 +86,7 @@ def parameter_count(signature):
 
 
 def check_swift_functions(problems):
-    header = re.compile(r"\b(func|init)\b.*\{\s*$|\bvar body: some View \{\s*$")
+    header = re.compile(r"\b(func|init)\b.*(\{|\(|,)\s*$|\bvar body: some View \{\s*$")
     for path in files({".swift"}):
         lines = path.read_text().splitlines()
         for i, line in enumerate(lines):
@@ -79,8 +95,8 @@ def check_swift_functions(problems):
             n = block_length(lines, i)
             if n > MAX_FUNCTION_LINES:
                 problems.append(("function_length", f"{rel(path)}:{i + 1} {n} lines: {line.strip()[:60]}"))
-            params = re.search(r"\bfunc\b[^(]*\((.*)\)", line)
-            if params and parameter_count(params.group(1)) > MAX_PARAMETERS:
+            params = signature_parameters(lines, i)
+            if params is not None and parameter_count(params) > MAX_PARAMETERS:
                 problems.append(("parameter_count", f"{rel(path)}:{i + 1}: {line.strip()[:60]}"))
 
 

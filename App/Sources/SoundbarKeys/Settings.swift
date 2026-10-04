@@ -118,6 +118,8 @@ final class AppModel: ObservableObject {
     @Published var isSearching = false
     /// Output devices for the key activation picker (refreshed when the settings open).
     @Published var outputDevices: [OutputDevice] = []
+    /// Message after a failed compatibility report.
+    @Published var reportError: String?
     @Published var signedIn = false
     @Published var isSigningIn = false
     /// Message of the last failed sign-in, shown in the account section.

@@ -227,6 +227,12 @@ private struct StatusSection: View {
                     NSWorkspace.shared.open(DiagLog.url)
                 }
             }
+            Button("Report compatibility …", action: actions.reportCompatibility)
+                .disabled(!model.connected)
+                .help(Text("Opens a GitHub issue with technical details of your soundbar: model, firmware and supported functions. No names or serial numbers."))
+            if let error = model.reportError {
+                Text(error).font(.callout).foregroundStyle(.red)
+            }
         }
     }
 }

@@ -66,6 +66,9 @@
 "inactive (%@)" = "inaktiv (%@)";
 "Token valid until" = "Token gültig bis";
 "Open diagnostic log" = "Diagnose-Log öffnen";
+"Report compatibility …" = "Kompatibilität melden …";
+"Opens a GitHub issue with technical details of your soundbar: model, firmware and supported functions. No names or serial numbers." = "Öffnet ein GitHub-Issue mit technischen Angaben zu deiner Soundbar: Modell, Firmware und unterstützte Funktionen. Keine Namen oder Seriennummern.";
+"The soundbar did not answer. Is it connected?" = "Die Soundbar hat nicht geantwortet. Ist sie verbunden?";
 "About" = "Über";
 "Version" = "Version";
 "GitHub" = "GitHub";
