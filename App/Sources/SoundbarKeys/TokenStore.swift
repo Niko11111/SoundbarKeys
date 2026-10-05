@@ -52,7 +52,9 @@ final class TokenStore {
     func save(_ t: BoseTokens) throws {
         let blob = try JSONEncoder().encode(t).base64EncodedString()
         let parts = TokenFormat.chunks(of: blob, size: Config.keychainChunkCharacters)
-        let add = "add-generic-password -U -s \(Self.service) -T /usr/bin/security"
+        // No `-T`: `security` trusts itself when it creates an item, and `-T` on an update (-U)
+        // changes the access list, which makes macOS ask for the login password per item.
+        let add = "add-generic-password -U -s \(Self.service)"
         var lines = parts.enumerated().map { "\(add) -a tokens.\($0.offset) -w \($0.element)" }
         lines.append("\(add) -a tokens.count -w \(parts.count)")
         try Self.runSecurity(args: ["-i"], stdin: lines.joined(separator: "\n") + "\n")

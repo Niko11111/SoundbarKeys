@@ -34,7 +34,9 @@ def _read(account: str) -> str | None:
 def save(tokens: dict) -> None:
     blob = base64.b64encode(json.dumps(tokens).encode()).decode()
     parts = [blob[i:i + CHUNK] for i in range(0, len(blob), CHUNK)]
-    add = f"add-generic-password -U -s {SERVICE} -T /usr/bin/security"
+    # No -T: security trusts itself when it creates an item, and -T on an update (-U)
+    # changes the access list, which makes macOS ask for the login password per item.
+    add = f"add-generic-password -U -s {SERVICE}"
     lines = [f"{add} -a tokens.{i} -w {p}" for i, p in enumerate(parts)]
     lines.append(f"{add} -a tokens.count -w {len(parts)}")
     _security_batch(lines)
