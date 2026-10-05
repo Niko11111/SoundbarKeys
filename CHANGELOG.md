@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2 – 2026-10-06
+
+- No more Keychain password prompts ("security wants to change access permissions …", three in a row) every few hours: saving refreshed tokens no longer rewrites the items' access list
+
 ## 1.1 – 2026-10-04
 
 - Settings window with toolbar tabs (General, Volume, Soundbar, Account, About); pages never grow taller than the screen
